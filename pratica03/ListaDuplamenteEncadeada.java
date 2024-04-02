@@ -1,140 +1,123 @@
-public class ListaDuplamenteEncadeada {
+public class ListaDuplamenteEncadeada<T>{
 
-  private Element head;
+  private Element<T> head;
+  private Element<T> tail;
 
-  private Element tail;
+  public class Element<E>{
+    private T data;
+    private Element<T> next;
+    private Element<T> prev;
 
-  public final class Element {
-
-    Object data;
-    Element next, prev;
-
-    Element(Object d, Element p, Element n) {
-      data = d;
-      next = n;
-      prev = p;
+    public Element(T data){
+      this.data = data;
+      this.next = null;
+      this.prev = null;
     }
 
-    public void inserirDepois(Object item) {
-
-      Element temp = new Element(item, this, next);
-      next = temp;
-
-      if (tail == this) {
-        tail = next;
-      } else {
-        temp.next.prev = temp;
-      }
-
+    public T getData(){
+      return this.data;
     }
 
-    public void inserirAntes(Object item) {
-
-      Element temp = new Element(item, prev, this);
-      prev = temp;
-
-      if (this == head) {
-        head = prev;
-      } else {
-        temp.prev.next = temp;
-      }
+    public Element<T> getNext(){
+      return this.next;
     }
 
+    public Element<T> getPrev(){
+      return this.prev;
+    }
+
+    public void setNext(Element<T> next){
+      this.next = next;
+    }
+
+    public void setPrev(Element<T> prev){
+      this.prev = prev;
+    }
   }
 
-  public void inserirInicio(Object item) {
-
-    Element temp = new Element(item, null,head);
-
-    if (head == null) {
-      tail = temp;
-
-    } else {
-      head.prev = temp;
-
-    }
-    head = temp;
+  public ListaDuplamenteEncadeada(){
+    this.head = null;
+    this.tail = null;
   }
 
-  public void inserirFim(Object item) {
-
-    Element temp = new Element(item, tail,null);
-
-    if (head == null) {
-      head = temp;
-    } else {
-      tail.next = temp;
+  public void inserirInicio(T data){
+    Element<T> novo = new Element<T>(data);
+    if(this.head == null){
+      this.head = novo;
+      this.tail = novo;
+    }else{
+      novo.setNext(this.head);
+      this.head.setPrev(novo);
+      this.head = novo;
     }
-    tail = temp;
-
   }
 
-  public void remover(Object item) throws ObjetoNaoEncontradoException {
-
-    Element ptr = head;
-
-    while (ptr != null && ptr.data != item) {
-      ptr = ptr.next;
+  public void inserirFim(T data){
+    Element<T> novo = new Element<T>(data);
+    if(this.head == null){
+      this.head = novo;
+      this.tail = novo;
+    }else{
+      this.tail.setNext(novo);
+      novo.setPrev(this.tail);
+      this.tail = novo;
     }
-
-    if (ptr == null) {
-      throw new ObjetoNaoEncontradoException();
-    }
-
-    if(ptr != head && ptr != tail) {
-      (ptr.prev).next = ptr.next;
-      (ptr.next).prev = ptr.prev;
-    }
-    
-    if (ptr == head) {
-      head = ptr.next;
-      head.prev = null;
-    }
-
-    if (ptr == tail) {
-      tail = ptr.prev;
-      tail.next = null;
-
-    } 
-
   }
 
-  public void imprimir() throws ListaVaziaException {
-
-    Element ptr = head;
-
-    if(isVazia()){
-      throw new ListaVaziaException();
-    }
-    System.out.print("Lista: ");
-    while (ptr != null) {
-      System.out.print(ptr.data + " | ");
-      ptr = ptr.next;
+  public void imprimir(){
+    Element<T> aux = this.head;
+    while(aux != null){
+      System.out.print(aux.getData() + " | ");
+      aux = aux.getNext();
     }
     System.out.println();
-
   }
 
-  public boolean isVazia() {
-    return head == null;
-  }
-
-  public void getTamanho() throws ListaVaziaException {
-
-    Element ptr = head;
-    int count = 0;
-
-    if(isVazia()){
+  public void remover(T data) throws ObjetoNaoEncontradoException, ListaVaziaException{
+    if(this.head == null){
       throw new ListaVaziaException();
+    }else{
+      Element<T> aux = this.head;
+      while(aux != null){
+        if(aux.getData().equals(data)){
+          if(aux == this.head){
+            this.head = aux.getNext();
+            if(this.head != null){
+              this.head.setPrev(null);
+            }
+          }else if(aux == this.tail){
+            this.tail = aux.getPrev();
+            if(this.tail != null){
+              this.tail.setNext(null);
+            }
+          }else{
+            aux.getPrev().setNext(aux.getNext());
+            aux.getNext().setPrev(aux.getPrev());
+          }
+          return;
+        }
+        aux = aux.getNext();
+      }
+      throw new ObjetoNaoEncontradoException();
     }
-
-    while (ptr != null) {
-      count++;
-      ptr = ptr.next;
-    }
-
-    System.out.println("Tamanho da lista: " + count);
-
   }
+
+  public void getTamanho(){
+    Element<T> aux = this.head;
+    int tamanho = 0;
+    while(aux != null){
+      tamanho++;
+      aux = aux.getNext();
+    }
+    System.out.println("Tamanho: " + tamanho);
+  }
+
+
+
+
+
+
+
+
 
 }

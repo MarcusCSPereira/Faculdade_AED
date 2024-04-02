@@ -1,7 +1,7 @@
 public class Teste {
   public static void main(String[] args) {
 
-    ListaDuplamenteEncadeada lista = new ListaDuplamenteEncadeada();
+    ListaDuplamenteEncadeada<Integer> lista = new ListaDuplamenteEncadeada<Integer>();
 
     try {
       lista.inserirInicio(1);
