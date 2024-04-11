@@ -5,33 +5,33 @@ public class ListaDuplamenteEncadeada<T>{
 
   public class Element<E>{
     private T data;
-    private Element<T> next;
-    private Element<T> prev;
+    private Element<T> proximo;
+    private Element<T> anterior;
 
     public Element(T data){
       this.data = data;
-      this.next = null;
-      this.prev = null;
+      this.proximo = null;
+      this.anterior = null;
     }
 
     public T getData(){
       return this.data;
     }
 
-    public Element<T> getNext(){
-      return this.next;
+    public Element<T> getproximo(){
+      return this.proximo;
     }
 
-    public Element<T> getPrev(){
-      return this.prev;
+    public Element<T> getanterior(){
+      return this.anterior;
     }
 
-    public void setNext(Element<T> next){
-      this.next = next;
+    public void setproximo(Element<T> proximo){
+      this.proximo = proximo;
     }
 
-    public void setPrev(Element<T> prev){
-      this.prev = prev;
+    public void setanterior(Element<T> anterior){
+      this.anterior = anterior;
     }
   }
 
@@ -46,8 +46,8 @@ public class ListaDuplamenteEncadeada<T>{
       this.head = novo;
       this.tail = novo;
     }else{
-      novo.setNext(this.head);
-      this.head.setPrev(novo);
+      novo.setproximo(this.head);
+      this.head.setanterior(novo);
       this.head = novo;
     }
   }
@@ -58,17 +58,18 @@ public class ListaDuplamenteEncadeada<T>{
       this.head = novo;
       this.tail = novo;
     }else{
-      this.tail.setNext(novo);
-      novo.setPrev(this.tail);
+      this.tail.setproximo(novo);
+      novo.setanterior(this.tail);
       this.tail = novo;
     }
   }
 
   public void imprimir(){
     Element<T> aux = this.head;
+    System.out.println("Lista do tipo " + this.head.getData().getClass().getName() + ": ");
     while(aux != null){
       System.out.print(aux.getData() + " | ");
-      aux = aux.getNext();
+      aux = aux.getproximo();
     }
     System.out.println();
   }
@@ -81,22 +82,22 @@ public class ListaDuplamenteEncadeada<T>{
       while(aux != null){
         if(aux.getData().equals(data)){
           if(aux == this.head){
-            this.head = aux.getNext();
+            this.head = aux.getproximo();
             if(this.head != null){
-              this.head.setPrev(null);
+              this.head.setanterior(null);
             }
           }else if(aux == this.tail){
-            this.tail = aux.getPrev();
+            this.tail = aux.getanterior();
             if(this.tail != null){
-              this.tail.setNext(null);
+              this.tail.setproximo(null);
             }
           }else{
-            aux.getPrev().setNext(aux.getNext());
-            aux.getNext().setPrev(aux.getPrev());
+            aux.getanterior().setproximo(aux.getproximo());
+            aux.getproximo().setanterior(aux.getanterior());
           }
           return;
         }
-        aux = aux.getNext();
+        aux = aux.getproximo();
       }
       throw new ObjetoNaoEncontradoException();
     }
@@ -107,7 +108,7 @@ public class ListaDuplamenteEncadeada<T>{
     int tamanho = 0;
     while(aux != null){
       tamanho++;
-      aux = aux.getNext();
+      aux = aux.getproximo();
     }
     System.out.println("Tamanho: " + tamanho);
   }

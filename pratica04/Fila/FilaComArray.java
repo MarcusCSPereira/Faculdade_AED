@@ -1,40 +1,44 @@
 package Fila;
 
-public class FilaComArray implements Fila {
+public class FilaComArray<T> implements IFila<T> {
 
-  private Object[] array;
+  private T[] array;
   private int count, head, tail;
 
+  @SuppressWarnings("unchecked")
   public FilaComArray(int tam) {
-    array = new Object[tam];
+    array = (T[])(new Object[tam]);
     head = 0;
     tail = tam - 1;
     count = 0;
   }
 
   @Override
-  public void enqueue(Object o) throws FilaCheiaException {
+  public void enqueue(T o) throws FilaCheiaException {
     if (count == array.length) {
       throw new FilaCheiaException();
     }
-    tail = (tail + 1) % array.length;
-    array[tail] = o;
+    array[count] = o;
     count++;
   }
 
-  @Override
-  public Object dequeue() throws FilaVaziaException, ListaVaziaException, ObjetoNaoEncontradoException {
+@Override
+public T dequeue() throws FilaVaziaException, ListaVaziaException, ObjetoNaoEncontradoException {
     if (count == 0) {
-      throw new FilaVaziaException();
+        throw new FilaVaziaException();
     }
-    Object result = array[head];
-    head = (head + 1) % array.length;
+    T obj = array[head];
+    array[head] = null;
+    for (int i = head + 1; i <= tail ; i++) {
+        array[i - 1] = array[i];
+    }
     count--;
-    return result;
-  }
+    return obj;
+}
+
 
   @Override
-  public Object getFront() throws FilaVaziaException, ListaVaziaException {
+  public T getFront() throws FilaVaziaException, ListaVaziaException {
     if (count == 0) {
       throw new FilaVaziaException();
     }

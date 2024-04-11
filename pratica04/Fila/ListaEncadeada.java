@@ -1,20 +1,20 @@
 package Fila;
 
-public class ListaEncadeada {
+public class ListaEncadeada<T> {
 
   private Element head;
   private Element tail;
 
   public final class Element {
-    Object data;
+    T data;
     Element next;
 
-    Element(Object d, Element n){
+    Element(T d, Element n){
       data = d;
       next = n;
     }
 
-      public Object getData(){
+      public T getData(){
         return data;
       }
 
@@ -22,14 +22,14 @@ public class ListaEncadeada {
         return next;
       }
 
-      public void inserirDepois(Object item){
+      public void inserirDepois(T item){
         next = new Element(item, head);
         if(tail == this){
           tail=next;
         }
       }
       
-      public void inserirAntes(Object item){
+      public void inserirAntes(T item){
         Element elementoTemporario = new Element(item, this);
         if(this == head){
           head = elementoTemporario;
@@ -61,21 +61,21 @@ public class ListaEncadeada {
     return(head==null);
   }
 
-  public Object getPrimeiro() throws ListaVaziaException{
+  public T getPrimeiro() throws ListaVaziaException{
     if(head == null){
       throw new ListaVaziaException();
     }
     return head.data;
   }
 
-  public Object getUltimo() throws ListaVaziaException{
+  public T getUltimo() throws ListaVaziaException{
     if(tail == null){
       throw new ListaVaziaException();
     }
     return tail.data;
   }
 
-  public void inserirInicio(Object item){
+  public void inserirInicio(T item){
     Element elementoTemporario = new Element(item, head);
     if(head == null){
       tail=elementoTemporario;
@@ -83,7 +83,7 @@ public class ListaEncadeada {
     head = elementoTemporario;
   }
 
-  public void inserirFim(Object item){
+  public void inserirFim(T item){
     Element elementoTemporario = new Element(item, null);
     if(head == null){
       head = elementoTemporario;
@@ -93,7 +93,7 @@ public class ListaEncadeada {
     tail = elementoTemporario;
   }
 
-  public void atribuir(ListaEncadeada L){
+  public void atribuir(ListaEncadeada<T> L){
     if(L != this){
       this.fazVazia();
       for(Element ponteiroAnteiror = L.head; ponteiroAnteiror != null; ponteiroAnteiror = ponteiroAnteiror.next){
@@ -102,13 +102,13 @@ public class ListaEncadeada {
     }
   }
 
-  public void concatenarListas(ListaEncadeada L){
+  public void concatenarListas(ListaEncadeada<T> L){
       for(Element ponteiroAnteiror = L.head; ponteiroAnteiror != null; ponteiroAnteiror = ponteiroAnteiror.next){
         this.inserirFim(ponteiroAnteiror.data);
       }
   }
 
-  public void extrair(Object item) throws ObjetoNaoEncontradoException{
+  public void extrair(T item) throws ObjetoNaoEncontradoException{
     Element ponteiroAnteiror = head;
     Element ant = null;
     while(ponteiroAnteiror != null && !ponteiroAnteiror.data.equals(item)){
@@ -130,11 +130,12 @@ public class ListaEncadeada {
 
   public void imprimirLista(){
     Element ponteiroAnteiror = head;
-    System.out.println("Lista " + this.getClass().getSimpleName() + ":");
+    System.out.print("Elementos: ");
     while(ponteiroAnteiror != null){
       System.out.print(ponteiroAnteiror.data + " | ");
       ponteiroAnteiror = ponteiroAnteiror.next;
     }
+    System.out.println();
   }
 
   public void tamanhoDaLista(){

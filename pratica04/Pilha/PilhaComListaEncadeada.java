@@ -1,35 +1,34 @@
 package Pilha;
 
-public class PilhaComListaEncadeada implements Pilha{
+public class PilhaComListaEncadeada<T> implements IPilha<T> {
 
-  private ListaEncadeada lista;
+  private ListaEncadeada<T> lista;
   private int count;
 
   public PilhaComListaEncadeada() {
-    lista = new ListaEncadeada();
+    lista = new ListaEncadeada<>();
     count = 0;
   }
 
-
   @Override
-  public void push(Object o) throws PilhaCheiaException {
-    lista.inserirInicio(o);
+  public void push(T element) throws PilhaCheiaException {
+    lista.inserirInicio(element);
     count++;
   }
 
   @Override
-  public Object pop() throws PilhaVaziaException, ListaVaziaException, ObjetoNaoEncontradoException {
+  public T pop() throws PilhaVaziaException, ListaVaziaException, ObjetoNaoEncontradoException {
     if (count == 0)
       throw new PilhaVaziaException();
 
-    Object result = lista.getPrimeiro();
+    T result = lista.getPrimeiro();
     lista.extrair(result);
-    count --;
+    count--;
     return result;
   }
 
   @Override
-  public Object getTop() throws PilhaVaziaException, ListaVaziaException {
+  public T getTop() throws PilhaVaziaException, ListaVaziaException {
     if (count == 0)
       throw new PilhaVaziaException();
     return lista.getPrimeiro();

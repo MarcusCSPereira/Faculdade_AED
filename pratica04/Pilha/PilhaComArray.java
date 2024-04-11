@@ -1,17 +1,18 @@
 package Pilha;
 
-public class PilhaComArray implements Pilha {
+public class PilhaComArray<T> implements IPilha<T> {
 
-  private Object[] array;
+  private T[] array;
   private int count;
 
+  @SuppressWarnings("unchecked")
   public PilhaComArray(int tam) {
     count = 0;
-    array = new Object[tam];
+    array = (T[]) new Object[tam];
   }
 
   @Override
-  public void push(Object o) throws PilhaCheiaException {
+  public void push(T o) throws PilhaCheiaException {
     if (count == array.length) {
       throw new PilhaCheiaException();
     }
@@ -20,7 +21,7 @@ public class PilhaComArray implements Pilha {
   }
 
   @Override
-  public Object pop() throws PilhaVaziaException {
+  public T pop() throws PilhaVaziaException {
     if (count == 0) {
       throw new PilhaVaziaException();
     }
@@ -29,7 +30,7 @@ public class PilhaComArray implements Pilha {
   }
 
   @Override
-  public Object getTop() throws PilhaVaziaException {
+  public T getTop() throws PilhaVaziaException {
     if (count == 0) {
       throw new PilhaVaziaException();
     }
