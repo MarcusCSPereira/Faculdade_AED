@@ -13,6 +13,7 @@ public class TesteListaClassificada {
       listaDeInteiros.inserir(6);
       listaDeInteiros.inserir(1);
       listaDeInteiros.inserir(11);
+      listaDeInteiros.inserir(5);
 
       listaDeInteiros.imprimir();
 

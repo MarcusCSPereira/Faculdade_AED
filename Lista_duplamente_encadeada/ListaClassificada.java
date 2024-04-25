@@ -33,6 +33,7 @@ public class ListaClassificada<T> {
     }
 
     public T getData() {
+
       return this.data;
     }
 

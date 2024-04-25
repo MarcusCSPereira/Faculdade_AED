@@ -9,7 +9,7 @@ public class FilaComArray<T> implements IFila<T> {
   public FilaComArray(int tam) {
     array = (T[])(new Object[tam]);
     head = 0;
-    tail = tam - 1;
+    tail = 0;
     count = 0;
   }
 
@@ -19,6 +19,7 @@ public class FilaComArray<T> implements IFila<T> {
       throw new FilaCheiaException();
     }
     array[count] = o;
+    tail = count;
     count++;
   }
 
