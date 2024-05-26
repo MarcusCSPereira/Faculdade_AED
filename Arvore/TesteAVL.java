@@ -1,70 +1,69 @@
-public class Teste {
+public class TesteAVL {
   public static void main(String[] args) {
-
-    Node<Integer> raiz = new Node<Integer>(10);
-
-    raiz.inserirOrdenado(5);
-    raiz.inserirOrdenado(3);
-    raiz.inserirOrdenado(7);
-    raiz.inserirOrdenado(12);
-    raiz.inserirOrdenado(11);
-    raiz.inserirOrdenado(4);
-    raiz.inserirOrdenado(15);
-    raiz.inserirOrdenado(13);
-    raiz.inserirOrdenado(17);
+    AVL_Helio<Integer> arvoreAVL = new AVL_Helio<Integer>(1);
+    arvoreAVL = arvoreAVL.InsereOrdenado(2, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(3, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(4,null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(5, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(6, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(7, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(8, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(9, null);
+    arvoreAVL = arvoreAVL.InsereOrdenado(11, null);
 
     System.out.println("=============================================");
     System.out.println("Impressão em Ordem");
-    raiz.imprimeInOrdem();
+    arvoreAVL.imprimeInOrdem();
     System.out.println();
 
     System.out.println("=============================================");
     System.out.println("Impressão Pré Ordem");
-    raiz.imprimeEmPreordem();
+    arvoreAVL.imprimeEmPreordem();
     System.out.println();
 
     System.out.println("=============================================");
     System.out.println("Impressão Pós Ordem");
-    raiz.imprimeEmPosordem();
+    arvoreAVL.imprimeEmPosordem();
     System.out.println();
 
     System.out.println("=============================================");
     System.out.println("Impressão em Largura");
-    raiz.imprimeEmLargura();
+    arvoreAVL.imprimeEmLargura();
     System.out.println();
 
     System.out.println("=============================================");
     System.out.println("Impressão em Largura Invertido");
-    raiz.imprimeEmLarguraInvertido();
+    arvoreAVL.imprimeEmLarguraInvertido();
     System.out.println();
 
     System.out.println("=============================================");
     System.out.println("Método de busca:");
-    System.out.println("Busca 7: " + raiz.pesquisarValor(7));
+    System.out.println("Busca 7: " + arvoreAVL.pesquisarValor(7));
 
     System.out.println("=============================================");
     System.out.println("Método de calcular altura:");
-    System.out.println("Altura da árvore: " + raiz.calculaAltura());
+    System.out.println("Altura da árvore: " + arvoreAVL.calculaAltura());
 
     System.out.println("=============================================");
     System.out.println("Método de calcular total de nós:");
-    System.out.println("Total de nós: " + raiz.calculaTotalNodes());
+    System.out.println("Total de nós: " + arvoreAVL.calculaTotalNodes());
 
     System.out.println("=============================================");
     System.out.println("Método de calcular total de nós folha:");
-    System.out.println("Total de nós folha: " + raiz.calculaTotalNodesFolhas());
+    System.out.println("Total de nós folha: " + arvoreAVL.calculaTotalNodesFolhas());
 
     System.out.println("=============================================");
     System.out.println("Removendo Nodes:");
     System.out.println();
     System.out.println("Arvore antes de remover o 11:");
-    raiz.imprimeInOrdem();
+    arvoreAVL.imprimeInOrdem();
     System.out.println();
-    raiz.removerNode(11, raiz.acharPai(raiz.pesquisarValor(11)));
+    arvoreAVL.removerNode(11, arvoreAVL.acharPai(arvoreAVL.pesquisarValor(11)));
     System.out.println();
     System.out.println("Arvore depois de remover o 11:");
-    raiz.imprimeInOrdem();
+    arvoreAVL.imprimeInOrdem();
     System.out.println();
     System.out.println("=============================================");
+
   }
 }
