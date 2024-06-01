@@ -137,7 +137,6 @@ public class Node<T> {
 
       if (no.getFilho_esq() != null) {
         f.add(no.getFilho_esq());
-        ;
       }
       if (no.getFilho_dir() != null) {
         f.add(no.getFilho_dir());
@@ -175,7 +174,6 @@ public class Node<T> {
 
       if (no.getFilho_esq() != null) {
         f.add(no.getFilho_esq());
-        ;
       }
       if (no.getFilho_dir() != null) {
         f.add(no.getFilho_dir());

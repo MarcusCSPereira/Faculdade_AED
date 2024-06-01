@@ -115,27 +115,41 @@ public class AVL_Helio<T extends Comparable<T>> extends Node<T> {
   */
   
   
-  protected AVL_Helio<T> removerNode(T v, AVL_Helio<T> nodepai) {
-    if (v.compareTo(this.getValor()) < 0) {
-      if (this.getFilho_esq() != null) {
-        this.setEsq(this.getFilho_esq().removerNode(v, this));
-      }
-    } else if (v.compareTo(this.getValor()) > 0) {
-      if (this.getFilho_dir() != null) {
-        this.setDir(this.getFilho_dir().removerNode(v, this));
-      }
-    } else {
-      // Encontramos o nó a ser removido
-      if (this.getFilho_esq() == null || this.getFilho_dir() == null) {
-        return (this.getFilho_esq() != null) ? this.getFilho_esq() : this.getFilho_dir();
-      } else {
-        Node<T> menorNodeDir = this.getFilho_dir().NodeComMenorValor();
-        this.setValor(menorNodeDir.getValor());
-        this.setDir(this.getFilho_dir().removerNode(this.getValor(), this));
-      }
+protected AVL_Helio<T> removerNode(T v, AVL_Helio<T> nodepai) {
+  // Se o valor a ser removido é menor que o valor do nó atual
+  if (v.compareTo(this.getValor()) < 0) {
+    // Se o filho à esquerda não é nulo
+    if (this.getFilho_esq() != null) {
+      // Remover o valor do filho à esquerda
+      this.setEsq(this.getFilho_esq().removerNode(v, this));
     }
-    return this.verificarbalanceamento(nodepai);
+  // Se o valor a ser removido é maior que o valor do nó atual
+  } else if (v.compareTo(this.getValor()) > 0) {
+    // Se o filho à direita não é nulo
+    if (this.getFilho_dir() != null) {
+      // Remover o valor do filho à direita
+      this.setDir(this.getFilho_dir().removerNode(v, this));
+    }
+  // Se encontramos o nó a ser removido (valores são iguais)
+  } else {
+    // Caso o nó tenha apenas um filho ou nenhum
+    if (this.getFilho_esq() == null || this.getFilho_dir() == null) {
+      // Retorna o filho que não é nulo, ou nulo se ambos forem nulos
+      return (this.getFilho_esq() != null) ? this.getFilho_esq() : this.getFilho_dir();
+    } else {
+      // Caso o nó tenha dois filhos
+      // Encontra o menor valor do filho à direita (o sucessor in-order)
+      Node<T> menorNodeDir = this.getFilho_dir().NodeComMenorValor();
+      // Substitui o valor do nó atual pelo menor valor do filho à direita
+      this.setValor(menorNodeDir.getValor());
+      // Remove o menor valor do filho à direita
+      this.setDir(this.getFilho_dir().removerNode(this.getValor(), this));
+    }
   }
+  // Após remoção, verifica e corrige o balanceamento da árvore
+  return this.verificarbalanceamento(nodepai);
+}
+
   
 
 
