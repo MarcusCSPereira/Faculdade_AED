@@ -1,19 +1,19 @@
 public class BuubleSort {
 
   public static void main(String[] args) {
-    int[] arr = { 5, 2, 8, 7, 1 };
-    bubbleSort(arr);
-    System.out.println("Sorted array's: ");
-    printArray(arr);
-    int x = 7;
-    int result = binarySearch(arr, x);
-    if (result == -1) {
-      System.out.println("Element não está presente no array");
-    } else {
-      System.out.println("Element encontrado no índice: " + result);
-    }
-  }
 
+    int quantidade = 100000;
+    int[] arr = new int[quantidade];
+
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = (int) (Math.random()*quantidade);
+    }
+       
+    bubbleSort(arr);
+
+    }
+
+  @SuppressWarnings("unused")
   private static void printArray(int[] arr) {
     for (int i = 0; i < arr.length; i++) {
       System.out.print(arr[i] + " ");
@@ -27,11 +27,6 @@ public class BuubleSort {
       for (int j = 0; j < n - i - 1; j++) {
         if (arr[j] > arr[j + 1]) {
           swap(arr, j);
-          /*
-          int temp = arr[j];
-          arr[j] = arr[j + 1];
-          arr[j + 1] = temp;
-          */
         }
       }
     }
@@ -43,6 +38,7 @@ public class BuubleSort {
     arr[j + 1] = temp;
   }
 
+  @SuppressWarnings("unused")
   private static int binarySearch(int[] arr, int x) {
     int left = 0;
     int right = arr.length - 1;
